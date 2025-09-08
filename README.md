@@ -8,6 +8,8 @@ sandpit
 Testing sandpit for VS Code and GitHub Actions Continuous Integration workflows,
 build toolchains and other shiz.
 
+![No Copilot](https://github.com/semuconsulting/PyGPSClient/blob/master/images/nocopilot100.png?raw=true)
+
 ## <a name="currentstatus">Current Status</a>
 
 ![Release](https://img.shields.io/github/v/release/semuadmin/semuadmin_sandpit)
@@ -23,3 +25,5 @@ build toolchains and other shiz.
 ## <a name="author">Author & License Information</a>
 
 ![GitHub License](https://img.shields.io/github/license/semuadmin/semuadmin_sandpit)
+
+[![Freedom for Ukraine](https://github.com/semuadmin/sandpit/blob/main/src/semuadmin_sandpit/resources/ukraine200.jpg?raw=true)](https://u24.gov.ua/)
