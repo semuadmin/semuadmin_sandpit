@@ -1,5 +1,9 @@
 # sandpit Release Notes
 
+### RELEASE 1.0.8
+
+1. Add Python 3.14
+
 ### RELEASE 1.0.3
 
 ### RELEASE 1.0.2

@@ -9,21 +9,21 @@ semuadmin\_sandpit.calculate module
 
 .. automodule:: semuadmin_sandpit.calculate
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 semuadmin\_sandpit.calculate\_cli module
 ----------------------------------------
 
 .. automodule:: semuadmin_sandpit.calculate_cli
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------
 
 .. automodule:: semuadmin_sandpit
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
