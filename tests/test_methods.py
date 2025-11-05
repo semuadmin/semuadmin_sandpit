@@ -50,7 +50,7 @@ class StaticTest(unittest.TestCase):
             if str(err) == "no display name and no $DISPLAY environment variable":
                 print(f"{err}\nCan't execute this test without Window environment")
             else:
-                print(err)
+                raise TclError from err
 
 
 if __name__ == "__main__":
