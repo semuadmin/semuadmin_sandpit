@@ -7,6 +7,7 @@ Created on 19 Dec 2020
 # pylint: disable=missing-class-docstring, missing-function-docstring
 
 import unittest
+from tkinter import Tk, Entry
 
 from semuadmin_sandpit.calculate import Calculate
 
@@ -39,6 +40,10 @@ class StaticTest(unittest.TestCase):
                 c.calc("divide", 2.5, 3.5),
                 0.7142857142857143,
             )
+
+    def testtk(self):  # test if Tk instance can be instantiated in GitHub test action
+        root = Tk()
+        ent = Entry(root)
 
 
 if __name__ == "__main__":
