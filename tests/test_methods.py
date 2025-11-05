@@ -7,7 +7,7 @@ Created on 19 Dec 2020
 # pylint: disable=missing-class-docstring, missing-function-docstring
 
 import unittest
-from tkinter import Tk, Entry
+from tkinter import Tk, Entry, TclError
 
 from semuadmin_sandpit.calculate import Calculate
 
@@ -42,8 +42,15 @@ class StaticTest(unittest.TestCase):
             )
 
     def testtk(self):  # test if Tk instance can be instantiated in GitHub test action
-        root = Tk()
-        ent = Entry(root)
+
+        try:
+            root = Tk()
+            ent = Entry(root)
+        except TclError as err:
+            if str(err) == "no display name and no $DISPLAY environment variable":
+                print(f"{err}\nCan't execute this test without Window environment")
+            else:
+                print(err)
 
 
 if __name__ == "__main__":
