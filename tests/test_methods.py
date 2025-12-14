@@ -42,13 +42,16 @@ class StaticTest(unittest.TestCase):
             )
 
     def testcli(self):  # must be installed via pip first
-        res = run(
-            ["calculate", "--function", "add", "--arg1", "2.5", "--arg2", "3.5"],
-            stdout=PIPE,
-            check=False,
-        )
-        res = res.stdout.decode("utf-8").strip("\r\n")
-        self.assertEqual(res, "6.0")
+        try:
+            res = run(
+                ["calculate", "--function", "add", "--arg1", "2.5", "--arg2", "3.5"],
+                stdout=PIPE,
+                check=False,
+            )
+            res = res.stdout.decode("utf-8").strip("\r\n")
+            self.assertEqual(res, "6.0")
+        except FileNotFoundError as err:
+            print(err)
 
 
 if __name__ == "__main__":

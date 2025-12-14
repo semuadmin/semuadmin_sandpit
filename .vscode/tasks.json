@@ -1,31 +1,51 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
+    // semuadmin_sandpit VSCode workflow.
     //
-    // This VSCode development workflow is intended to work on
-    // MacOS, Linux and Windows (with Powershell>=5.1).
+    // These build, install and test tasks are targeted at a venv
+    // called 'semuadmin_sandpit' located in the user's home directory.
+    // Set your workspace default VSCode Python interpreter to
+    // this venv, i.e.
+    // "${userHome}/semuadmin_sandpit/bin/python3" on Linux/MacOS
+    // "C:/Users/myuser/semuadmin_sandpit/Scripts/python.exe" on Windows
     //
-    // Use the Install Deploy Dependencies tasks to install the necessary
-    // build and test packages into the system environment.
+    // The "Test" task will initialise the venv and execute all
+    // necessary build and installation precursors.
     //
-    // Use the Create Venv task to create a virtual environment in the
-    // designated directory. Select this environment using Select
-    // Interpreter to auto-activate it via New Terminal.
-    //
-    // Remember to include any global Python bin (Scripts on Windows) in PATH.
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Delete Venv",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "${config:venv}",
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "Create Venv",
             "type": "process",
-            "command": "${config:python.defaultInterpreterPath}",
+            "command": "${config:python.systemPath}",
             "args": [
                 "-m",
                 "venv",
                 "${config:venv}",
-                //"--system-site-packages"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Delete Venv",
+            ],
+        },
+        {
+            "label": "Activate Venv",
+            "type": "shell",
+            "command": "source",
+            "args": [
+                "~/semuadmin_sandpit/bin/activate",
+            ],
+            "problemMatcher": [],
         },
         {
             "label": "Install Deploy Dependencies",
@@ -35,10 +55,25 @@
                 "-m",
                 "pip",
                 "install",
+                "--upgrade",
                 "--group",
                 "deploy"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+        },
+        {
+            "label": "Install Optional Dependencies",
+            "type": "process",
+            "command": "${config:python.defaultInterpreterPath}",
+            "args": [
+                "-m",
+                "pip",
+                "install",
+                "--upgrade",
+                "--group",
+                "optional"
+            ],
+            "problemMatcher": [],
         },
         {
             "label": "Clean",
@@ -53,13 +88,14 @@
                 "${config:modulename}.egg-info",
             ],
             "windows": {
-                "command": "rm",
+                "command": "Remove-Item",
                 "args": [
-                    "-R",
-                    "-Path",
-                    "'src/${config:modulename}.egg-info','build','dist','htmlcov','docs/_build'",
+                    "-Recurse",
+                    "-Force",
                     "-ErrorAction",
-                    "SilentlyContinue" // doesn't work! - stops on exit code 1 anyway
+                    "SilentlyContinue", // doesn't work! - stops on exit code 1 anyway
+                    "-Path",
+                    "'build','dist','htmlcov','docs/_build','src/${config:modulename}.egg-info'",
                 ]
             },
             "options": {
@@ -105,30 +141,14 @@
         {
             "label": "Security",
             "type": "process",
-            "command": "${config:python.defaultInterpreterPath}",
+            "command": "bandit",
             "args": [
-                "-m",
-                "bandit",
                 "-c",
                 "pyproject.toml",
                 "-r",
-                "."
+                "src/semuadmin_sandpit"
             ],
             "problemMatcher": []
-        },
-        {
-            "label": "Test",
-            "type": "process",
-            "command": "${config:python.defaultInterpreterPath}",
-            "args": [
-                "-m",
-                "pytest"
-            ],
-            "problemMatcher": [],
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            }
         },
         {
             "label": "Build",
@@ -144,15 +164,50 @@
             "problemMatcher": [],
             "dependsOrder": "sequence",
             "dependsOn": [
+                "Create Venv",
+                "Install Deploy Dependencies",
+                "Install Optional Dependencies",
                 "Clean",
-                "Security",
                 "Sort Imports",
                 "Format",
-                "Pylint",
-                "Test",
             ],
             "group": {
                 "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Install", // into venv
+            "type": "process",
+            "command": "${config:python.defaultInterpreterPath}",
+            "args": [
+                "-m",
+                "pip",
+                "install",
+                "--force-reinstall",
+                "${workspaceFolder}/dist/semuadmin_sandpit-${config:version}-py3-none-any.whl",
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "label": "Test",
+            "type": "process",
+            "command": "${config:python.defaultInterpreterPath}",
+            "args": [
+                "-m",
+                "pytest"
+            ],
+            "problemMatcher": [],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build",
+                "Install", // have to install before running pylint
+                "Pylint",
+                "Security",
+                "Sphinx HTML",
+            ],
+            "group": {
+                "kind": "test",
                 "isDefault": true
             }
         },
@@ -191,7 +246,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Sphinx Deploy to S3", // needs AWS credentials
+            "label": "Sphinx Deploy", // needs AWS S3 credentials
             "type": "process",
             "command": "aws",
             "args": [
@@ -208,29 +263,16 @@
             "problemMatcher": []
         },
         {
-            "label": "Install Locally",
+            "label": "Run Installed Version",
             "type": "process",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
-                "pip",
-                "install",
-                "--upgrade",
-                "--force-reinstall",
-                "--find-links=${workspaceFolder}/dist",
-                "${workspaceFolderBasename}",
-                // "--target",
-                // "${config:venv}/Lib/site-packages"
-            ],
-            "options": {
-                "cwd": "dist"
-            },
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "Build",
-                "Sphinx HTML"
+                "semuadmin_sandpit",
+                //"--verbosity",
+                //"3"
             ],
             "problemMatcher": []
-        }
+        },
     ]
 }
