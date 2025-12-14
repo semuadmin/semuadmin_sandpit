@@ -1,5 +1,9 @@
 # sandpit Release Notes
 
+### RELEASE 1.0.9
+
+1. Update VSCode tasks to run in venv
+
 ### RELEASE 1.0.8
 
 1. Add Python 3.14
