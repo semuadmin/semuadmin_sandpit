@@ -17,7 +17,7 @@
     "modulename": "semuadmin_sandpit",
     "distname": "semuadmin_sandpit",
     "venv": "${userHome}/semuadmin_sandpit",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "python.testing.pytestArgs": [
         "tests"
     ],

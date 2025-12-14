@@ -10,19 +10,22 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../src"))
-
-print(f"DEBUG sys path {sys.path}")
+# get path to site-packages (source) folder within venv
+pypath = (
+    f"{os.path.expanduser("~")}/semuadmin_sandpit/lib/python"
+    f"{sys.version_info.major}.{sys.version_info.minor}/site-packages"
+)
+print(f"\nUsing absolute path: {pypath}\n")
+sys.path.insert(0, os.path.abspath(pypath))
 
 from semuadmin_sandpit import version as VERSION
 
 # -- Project information -----------------------------------------------------
-project = "sandpit"
-copyright = "2021, SEMU Consulting"
+project = "semuadmin_sandpit"
+copyright = "2021, semuadmin (Steve Smith)"
 author = "semuadmin"
 
 # The full version, including alpha/beta/rc tags
