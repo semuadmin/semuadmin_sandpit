@@ -1,5 +1,9 @@
 # sandpit Release Notes
 
+### RELEASE 1.0.11
+
+1. Update GitHub actions for Node24
+
 ### RELEASE 1.0.10
 
 1. Update GitHub actions for Node24
