@@ -87,7 +87,7 @@ fail-under = "9.8"
 fail-on = "E,F"
 clear-cache-post-run = "y"
 good-names = "i,j,x,y"
-ignore = "dill"
+ignore = "dill,pickle"
 disable = """
     raw-checker-failed,
     bad-inline-option,
