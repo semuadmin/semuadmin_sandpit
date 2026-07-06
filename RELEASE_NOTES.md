@@ -1,5 +1,9 @@
 # sandpit Release Notes
 
+### RELEASE 1.1.0
+
+1. Add support for Python 3.15.0-beta
+
 ### RELEASE 1.0.11
 
 1. Update GitHub actions for Node24
