@@ -20,8 +20,8 @@ jobs:
         run: pip install --group deploy
       - name: Install code dependencies
         run: pip install .
-      # - name: Lint with pylint
-      #   run: pylint -E src
+      - name: Lint with pylint
+        run: pylint -E src
       - name: Scan security vulnerabilities with bandit
         run: bandit -c pyproject.toml -r .
       - name: Generate test coverage report

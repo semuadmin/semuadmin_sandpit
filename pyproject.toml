@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=75.0.0", "wheel"]         # >=64 for PEP660 support
+requires = ["setuptools>=82.0.0", "wheel"]         # >=64 for PEP660 support
 build-backend = "setuptools.build_meta:__legacy__"
 
 [project]
@@ -47,17 +47,17 @@ build = [
     "build",
     "packaging>=24.2",
     "pip",
-    "setuptools >= 75.0",
+    "setuptools >= 82.0",
     "twine>=6.1.0",
     "wheel",
 ]
 test = [
-    "bandit>=1.8",
-    "black>=25.0",
-    "pytest>=8.4",
+    "bandit>=1.9",
+    "black>=26.0",
+    "pytest>=9.0",
     "pytest-cov",
-    "isort>=6.0",
-    "pylint>=3.3",
+    "isort>=8.0",
+    "pylint>=4.0",
     "Sphinx>=7.4",
     "sphinx-rtd-theme",
 ]
