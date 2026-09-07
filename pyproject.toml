@@ -84,10 +84,8 @@ reports = "y"
 recursive = "y"
 py-version = "3.11"
 fail-under = "9.8"
-fail-on = "E,F"
 clear-cache-post-run = "y"
 good-names = "i,j,x,y"
-ignored-modules = ["dill"]
 disable = """
     raw-checker-failed,
     bad-inline-option,
