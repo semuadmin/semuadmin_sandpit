@@ -68,7 +68,7 @@ deploy = [{ include-group = "build" }, { include-group = "test" }]
 version = { attr = "semuadmin_sandpit._version.__version__" }
 
 [tool.black]
-target-version = ['py310']
+target-version = ['py311']
 
 [tool.isort]
 py_version = 311
@@ -87,6 +87,7 @@ fail-under = "9.8"
 fail-on = "E,F"
 clear-cache-post-run = "y"
 good-names = "i,j,x,y"
+ignored-modules = ["dill"]
 disable = """
     raw-checker-failed,
     bad-inline-option,
