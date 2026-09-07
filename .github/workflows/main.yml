@@ -10,13 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version:
-          ["3.10", "3.11", "3.12", "3.13", "3.14", "3.15.0-beta.3"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.15.0-rc2"]
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install deploy dependencies
@@ -29,8 +28,3 @@ jobs:
         run: bandit -c pyproject.toml -r -lll .
       - name: Generate test coverage report
         run: pytest
-      - name: "Upload coverage to Codecov"
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # supposedly not required for public repos
-          fail_ci_if_error: true
