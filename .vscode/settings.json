@@ -17,7 +17,7 @@
     "modulename": "semuadmin_sandpit",
     "distname": "semuadmin_sandpit",
     "venv": "${userHome}/semuadmin_sandpit",
-    "version": "1.0.9",
+    "version": "1.1.0",
     "python.testing.pytestArgs": [
         "tests"
     ],
@@ -30,7 +30,7 @@
     "python-envs.defaultEnvManager": "ms-python.python:venv",
     "python-envs.pythonProjects": [],
     "python.venvPath": "${userHome}/semuadmin_sandpit/bin/python3",
-    "python.systemPath": "/usr/local/bin/python3.14",
+    "python.systemPath": "/usr/local/bin/python3.15",
     "python.defaultInterpreterPath": "${userHome}/semuadmin_sandpit/bin/python3",
     //"python.defaultInterpreterPath": "C:/Users/steve/semuadmin_sandpit/Scripts/python.exe",
     "python.testing.unittestEnabled": false

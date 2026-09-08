@@ -5,8 +5,11 @@ build-backend = "setuptools.build_meta:__legacy__"
 [project]
 name = "semuadmin_sandpit"
 dynamic = ["version"]
-authors = [{ name = "Steve Smith", email = "semuadmin@semuconsulting.com" }]
-maintainers = [{ name = "Steve Smith", email = "semuadmin@semuconsulting.com" }]
+authors = [{ name = "Steve Smith" }, { email = "semuadmin@semuconsulting.com" }]
+maintainers = [
+    { name = "Steve Smith" },
+    { email = "semuadmin@semuconsulting.com" },
+]
 description = "Sandpit development, test and build environment"
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]

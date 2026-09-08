@@ -6,7 +6,7 @@
     // Set your workspace default VSCode Python interpreter to
     // this venv, i.e.
     // "${userHome}/semuadmin_sandpit/bin/python3" on Linux/MacOS
-    // "C:/Users/myuser/semuadmin_sandpit/Scripts/python.exe" on Windows
+    // "C:/Users/user/semuadmin_sandpit/Scripts/python.exe" on Windows
     //
     // The "Test" task will initialise the venv and execute all
     // necessary build and installation precursors.
@@ -25,7 +25,7 @@
         },
         {
             "label": "Create Venv",
-            "type": "process",
+            "type": "shell",
             "command": "${config:python.systemPath}",
             "args": [
                 "-m",
@@ -43,13 +43,13 @@
             "type": "shell",
             "command": "source",
             "args": [
-                "~/semuadmin_sandpit/bin/activate",
+                "~/pygpsclient/bin/activate",
             ],
             "problemMatcher": [],
         },
         {
             "label": "Install Deploy Dependencies",
-            "type": "process",
+            "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
@@ -63,7 +63,7 @@
         },
         {
             "label": "Install Optional Dependencies",
-            "type": "process",
+            "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
@@ -105,7 +105,7 @@
         },
         {
             "label": "Sort Imports",
-            "type": "process",
+            "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
@@ -118,7 +118,7 @@
         },
         {
             "label": "Format",
-            "type": "process",
+            "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
@@ -146,13 +146,13 @@
                 "-c",
                 "pyproject.toml",
                 "-r",
-                "src/semuadmin_sandpit"
+                "src/pygpsclient"
             ],
             "problemMatcher": []
         },
         {
             "label": "Build",
-            "type": "process",
+            "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
@@ -164,7 +164,7 @@
             "problemMatcher": [],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Create Venv",
+                //"Create Venv",
                 "Install Deploy Dependencies",
                 "Install Optional Dependencies",
                 "Clean",
@@ -177,21 +177,32 @@
             }
         },
         {
-            "label": "Install", // into venv
-            "type": "process",
+            "label": "Install", // into Virtual Environment
+            "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
                 "pip",
                 "install",
                 "--force-reinstall",
-                "${workspaceFolder}/dist/semuadmin_sandpit-${config:version}-py3-none-any.whl",
+                // wildcard only works on Posix platforms
+                "${workspaceFolder}/dist/semuadmin_sandpit-*-py3-none-any.whl",
             ],
+            "windows": {
+                "command": "${config:python.defaultInterpreterPath}",
+                "args": [
+                    "-m",
+                    "pip",
+                    "install",
+                    "--force-reinstall",
+                    "${workspaceFolder}/dist/semuadmin_sandpit-1.1.0-py3-none-any.whl",
+                ]
+            },
             "problemMatcher": [],
         },
         {
             "label": "Test",
-            "type": "process",
+            "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
                 "-m",
@@ -200,6 +211,7 @@
             "problemMatcher": [],
             "dependsOrder": "sequence",
             "dependsOn": [
+                "Activate Venv",
                 "Build",
                 "Install", // have to install before running pylint
                 "Pylint",
@@ -213,7 +225,7 @@
         },
         {
             "label": "Sphinx",
-            "type": "process",
+            "type": "shell",
             "command": "sphinx-apidoc",
             "args": [
                 "--ext-autodoc",
@@ -228,7 +240,7 @@
         },
         {
             "label": "Sphinx HTML",
-            "type": "process",
+            "type": "shell",
             "command": "/usr/bin/make",
             "windows": {
                 "command": "${workspaceFolder}/docs/make.bat"
@@ -247,7 +259,7 @@
         },
         {
             "label": "Sphinx Deploy", // needs AWS S3 credentials
-            "type": "process",
+            "type": "shell",
             "command": "aws",
             "args": [
                 "s3",
@@ -263,15 +275,18 @@
             "problemMatcher": []
         },
         {
-            "label": "Run Installed Version",
-            "type": "process",
-            "command": "${config:python.defaultInterpreterPath}",
+            "label": "Run from Source",
+            "type": "shell",
+            "command": "python3",
             "args": [
                 "-m",
-                "semuadmin_sandpit",
+                "pygpsclient",
                 //"--verbosity",
                 //"3"
             ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
             "problemMatcher": []
         },
     ]
