@@ -1,0 +1,34 @@
+# sandpit Release Notes
+
+### RELEASE 1.1.0
+
+1. Add support for Python 3.15.0-beta
+
+### RELEASE 1.0.11
+
+1. Update GitHub actions for Node24
+
+### RELEASE 1.0.10
+
+1. Update GitHub actions for Node24
+
+### RELEASE 1.0.9
+
+1. Update VSCode tasks to run in venv
+
+### RELEASE 1.0.8
+
+1. Add Python 3.14
+
+### RELEASE 1.0.3
+
+### RELEASE 1.0.2
+
+1. Add trusted publisher workflow
+### RELEASE 1.0.0
+
+1. Checking GitHub workflows for Python 3.13 compatibility
+
+### RELEASE 0.0.4-alpha
+
+1. Initial release for pyproject.toml
