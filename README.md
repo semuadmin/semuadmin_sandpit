@@ -8,7 +8,7 @@ sandpit
 Testing sandpit for VS Code and GitHub Actions Continuous Integration workflows,
 build toolchains and other shiz.
 
-![No Copilot](https://github.com/semuconsulting/PyGPSClient/blob/master/images/nocopilot100.png?raw=true)
+![No Copilot](https://github.com/semuconsulting/PyGPSClient/blob/main/images/nocopilot100.png?raw=true)
 
 ## <a name="currentstatus">Current Status</a>
 
