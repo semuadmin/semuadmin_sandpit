@@ -11,7 +11,6 @@ Welcome to sandpit's documentation!
    :caption: Contents:
 
    modules.rst
-   sandpit.rst
 
 
 Indices and tables
