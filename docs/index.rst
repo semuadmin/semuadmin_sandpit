@@ -10,6 +10,8 @@ Welcome to sandpit's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   modules.rst
+   sandpit.rst
 
 
 Indices and tables

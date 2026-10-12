@@ -43,7 +43,20 @@
             "type": "shell",
             "command": "source",
             "args": [
-                "~/pygpsclient/bin/activate",
+                "~/semuadmin_sandpit/bin/activate",
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "label": "Upgrade pip", // for --group argument support
+            "type": "shell",
+            "command": "${config:python.defaultInterpreterPath}",
+            "args": [
+                "-m",
+                "pip",
+                "install",
+                "--upgrade",
+                "pip",
             ],
             "problemMatcher": [],
         },
@@ -76,7 +89,7 @@
             "problemMatcher": [],
         },
         {
-            "label": "Install Dill 0.4.2 for Python 3.15",
+            "label": "Install dill 0.4.2.dev for Python 3.15",
             "type": "shell",
             "command": "${config:python.defaultInterpreterPath}",
             "args": [
@@ -159,7 +172,7 @@
                 "-c",
                 "pyproject.toml",
                 "-r",
-                "src/pygpsclient"
+                "src/semuadmin_sandpit"
             ],
             "problemMatcher": []
         },
@@ -177,10 +190,12 @@
             "problemMatcher": [],
             "dependsOrder": "sequence",
             "dependsOn": [
-                //"Create Venv",
+                "Create Venv",
+                "Activate Venv",
+                "Upgrade pip",
                 "Install Deploy Dependencies",
                 "Install Optional Dependencies",
-                "Install Dill 0.4.2 for Python 3.15",
+                "Install dill 0.4.2.dev for Python 3.15",
                 "Clean",
                 "Sort Imports",
                 "Format",
@@ -209,7 +224,7 @@
                     "pip",
                     "install",
                     "--force-reinstall",
-                    "${workspaceFolder}/dist/semuadmin_sandpit-1.1.0-py3-none-any.whl",
+                    "${workspaceFolder}/dist/semuadmin_sandpit-1.6.0-py3-none-any.whl",
                 ]
             },
             "problemMatcher": [],
@@ -225,7 +240,6 @@
             "problemMatcher": [],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Activate Venv",
                 "Build",
                 "Install", // have to install before running pylint
                 "Pylint",
@@ -294,7 +308,7 @@
             "command": "python3",
             "args": [
                 "-m",
-                "pygpsclient",
+                "semuadmin_sandpit",
                 //"--verbosity",
                 //"3"
             ],

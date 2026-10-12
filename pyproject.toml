@@ -49,7 +49,7 @@ changelog = "https://github.com/semuadmin/semuadmin_sandpit/blob/master/RELEASE_
 build = [
     "build",
     "packaging>=24.2",
-    "pip",
+    "pip>25.1",
     "setuptools >= 82.0",
     "twine>=6.1.0",
     "wheel",
@@ -71,10 +71,10 @@ deploy = [{ include-group = "build" }, { include-group = "test" }]
 version = { attr = "semuadmin_sandpit._version.__version__" }
 
 [tool.black]
-target-version = ['py311']
+target-version = ['py310']
 
 [tool.isort]
-py_version = 311
+py_version = 310
 profile = "black"
 
 [tool.bandit]
@@ -85,7 +85,7 @@ skips = []
 jobs = 0
 reports = "y"
 recursive = "y"
-py-version = "3.11"
+py-version = "3.10"
 fail-under = "9.8"
 fail-on = "E,F"
 clear-cache-post-run = "y"

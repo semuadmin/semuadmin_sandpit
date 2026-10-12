@@ -12,13 +12,17 @@
 #
 import os
 import sys
+try:
+    GIL = "" if sys._is_gil_enabled() else "t"
+except (ImportError, AttributeError):
+    GIL = ""
 
 # get path to site-packages (source) folder within venv
 pypath = (
-    f"{os.path.expanduser("~")}/semuadmin_sandpit/lib/python"
-    f"{sys.version_info.major}.{sys.version_info.minor}/site-packages"
+    f"{os.path.expanduser('~')}/semuadmin_sandpit/lib/python"
+    f"{sys.version_info.major}.{sys.version_info.minor}{GIL}/site-packages"
 )
-print(f"\nUsing absolute path: {pypath}\n")
+print(f"\n\033[1mUsing absolute path:\033[0m \033[95m{pypath}\033[0m\n")
 sys.path.insert(0, os.path.abspath(pypath))
 
 from semuadmin_sandpit import version as VERSION
@@ -61,7 +65,6 @@ html_title = "<project> v<version> documentation."
 # html_static_path = ["_static"]
 html_last_updated_fmt = "%b %d %Y"
 html_theme_options = {
-    "display_version": True,
 }
 
 autodoc_default_options = {
