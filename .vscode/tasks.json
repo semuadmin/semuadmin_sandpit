@@ -179,7 +179,7 @@
                 "-c",
                 "pyproject.toml",
                 "-r",
-                "src/semuadmin_sandpit"
+                "."
             ],
             "problemMatcher": []
         },

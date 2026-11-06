@@ -7,7 +7,7 @@ Created on 19 Dec 2020
 # pylint: disable=missing-class-docstring, missing-function-docstring
 
 import unittest
-from subprocess import PIPE, run
+from subprocess import PIPE, run  #nosec
 
 from semuadmin_sandpit.calculate import Calculate
 from semuadmin_sandpit.helpers import val2bytes, bytes2val, nomval
@@ -48,7 +48,7 @@ class StaticTest(unittest.TestCase):
                 ["calculate", "--function", "add", "--arg1", "2.5", "--arg2", "3.5"],
                 stdout=PIPE,
                 check=False,
-            )
+            ) #nosec
             res = res.stdout.decode("utf-8").strip("\r\n")
             self.assertEqual(res, "6.0")
         except FileNotFoundError as err:
